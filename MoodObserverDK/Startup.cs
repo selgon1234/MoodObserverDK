@@ -26,9 +26,9 @@ namespace MoodObserverDK
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async (context) =>
+            app.UseMvc(routes =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                routes.MapRoute("Default", "{controller=Home}/{action=index}/{id:int}");
             });
             app.UseFileServer();
         }
