@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using System.Data.SqlClient;
+using System.Text;
 
 namespace MoodObserverDK
 {
@@ -31,6 +33,45 @@ namespace MoodObserverDK
                 routes.MapRoute("Default", "{controller=Home}/{action=index}/{id:int}");
             });
             app.UseFileServer();
+
+            try
+            {
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "your_server.database.windows.net";
+                builder.UserID = "your_user";
+                builder.Password = "your_password";
+                builder.InitialCatalog = "your_database";
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    Console.WriteLine("\nQuery data example:");
+                    Console.WriteLine("=========================================\n");
+
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("SELECT TOP 20 pc.Name as CategoryName, p.name as ProductName ");
+                    sb.Append("FROM [SalesLT].[ProductCategory] pc ");
+                    sb.Append("JOIN [SalesLT].[Product] p ");
+                    sb.Append("ON pc.productcategoryid = p.productcategoryid;");
+                    string sql = sb.ToString();
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            Console.ReadLine();
         }
     }
 }
