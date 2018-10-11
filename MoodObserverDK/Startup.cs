@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using System.Data.SqlClient;
-using System.Text;
 
 namespace MoodObserverDK
 {
@@ -37,10 +37,10 @@ namespace MoodObserverDK
             try
             {
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "your_server.database.windows.net";
-                builder.UserID = "your_user";
-                builder.Password = "your_password";
-                builder.InitialCatalog = "your_database";
+                builder.DataSource = "conferencedb2.database.windows.net";
+                builder.UserID = "simongj";
+                builder.Password = "";
+                builder.InitialCatalog = "moodobserverdb";
 
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
