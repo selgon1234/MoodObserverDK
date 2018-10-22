@@ -1,21 +1,34 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <title>Forside</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8" />
-    <title>Login Form</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <div class="Loginbox">
+    <h1>Log in</h1>
 
-        <h1>Login Here</h1>
-        <form action="http://localhost:56008/smiley.html">
-            <p>Username</p>
-            <input type="text" name="navn" placeholder="Enter Username" required pattern="johnsmith">
-            <p>Password</p>
-            <input type="password" name="kode" placeholder="Enter Password" required pattern="666666">
-            <input type="submit" name="" value="Login">
-        </form>
-    </div>
+    <table align="center">
+        <th>
+            <form action="action_page.php">
+                <img src="img/logo.jpg" width="500px"><br />
+
+                <br /><br />
+
+                <input type="text" placeholder="Enter Username" name="uname" required><br />
+
+                <br />
+
+                <input type="password" width="500px" placeholder="Enter Password" name="psw" required><br />
+
+                <br />
+
+                <button type="button" class="redbutton">Forgot password?</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="submit"><a href="aktiviteter.html">Login</button></a><br>
+
+            </form>
+        </th>
+    </table>
 </body>
 </html>
