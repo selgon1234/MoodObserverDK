@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿<!--<!DOCTYPE html>
 <html>
 <head>
     <title></title>
@@ -7,41 +7,101 @@
 </head>
 <body>
     <h1>Aktiviteter</h1>
+    <select id="aktivitetsliste" onchange="getSelectedValue();">
+        <option value="motionscykel">Motionscykel</option>
+        <option value="gåtur">Gåtur</option>
+        <option value="danse">Danse</option>
+        <option value="male">Male</option>
+        <option value="brætspil">Brætspil</option>
+        <option value="strikke">Strikke</option>
+    </select>
+    <script>
+        function getSelectedValue() {
+            var selectedValue = document.getElementById("aktivitetsliste").value;
+            console.log(selectedValue);
+        }
+    </script>
+</body>
+</html>-->
+<html>
+<head>
+    <title>Registration Form</title>
+</head>
+<body>
+    <link href="style.css" type="text/css" rel="stylesheet" />
+    <h2>Registrer beboer</h2>
+    <form name="form1" action="modified.php" method="post" enctype="multipart/form-data">
+        <div class="container">
+            <div class="form_group">
+                <label>Beboer ID:</label>
+                <input type="text" name="beboerid" value="" required />
+                <br />
+            </div>
+            <div class="form_group">
+                <label><b>Vælg Aktivitet</b></label>
+                <br />
+                <label>Motionscykel:</label>
+                <input type="radio" name="aktivitet" value="Motionscykel" required />
+                <label>Danse:</label>
+                <input type="radio" name="aktivitet" value="Danse" required />
+                <label>Gåtur:</label>
+                <input type="radio" name="aktivitet" value="Gåtur" required />
+                <label>Male:</label>
+                <input type="radio" name="aktivitet" value="Male" required />
+                <label>Brætspil:</label>
+                <input type="radio" name="aktivitet" value="Brætspil" required />
+                <label>Strikke:</label>
+                <input type="radio" name="aktivitet" value="Strikke" required />
+                <br />
+                <br />
+                <br />
+            </div>
+            <div class="form_group">
 
-    <table align="center">
-        <tr>
-            <th>Motioncykel</th>
-            <th>Gåtur</th>
-            <th>Male</th>
-        </tr>
-        <tr>
-            <td>
-                <img src="img/motion.jpg" class="img">
-            </td>
-            <td>
-                <img src="img/gaatur.jpg" class="img">
-            </td>
-            <td>
-                <img src="img/male.jpg" class="img">
-            </td>
-        </tr>
-        <tr>
-            <th>Danse</th>
-            <th>Brætspil</th>
-            <th>Strikke</th>
-        </tr>
-        <tr>
-            <td>
-                <img src="img/danse.jpg" class="img">
-            </td>
-            <td>
-                <img src="img/spille.jpg" class="img">
-            </td>
-            <td>
-                <img src="img/strikke.jpg" class="img">
-            </td>
-        </tr>
-    </table>
+                <label><b>Vælg humør</b></label>
+                <br />
+                <label>Glad</label>
+                <input type="radio" name="humør" value="Glad" required />
+                <label>Neutral:</label>
+                <input type="radio" name="humør" value="Neutral" required />
+                <label>Trist:</label>
+                <input type="radio" name="humør" value="Trist" required />
+                <br />
+                <br />
+                <br />
+            </div>
+            <div>
+                <button type="button" onclick="clickHandler()">Gem</button>
 
+                <script>
+                    function clickHandler() {
+                        var form = document.querySelector("form");
+                        var log = document.querySelector("#log");
+
+                        form.addEventListener("submit", function (event) {
+                            var data = new FormData(form);
+                            var output = "";
+                            for (const entry of data) {
+                                output = entry[0] + "=" + entry[1] + "\r";
+                            };
+                            log.innerText = output;
+                            event.preventDefault();
+                        }, false);
+                    }
+                </script>
+            </div>
+        </div>
+    </form>
+    <pre id="log">
+</pre>
 </body>
 </html>
+
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$conn = mysql_connect ($servername , $username , $password) or die("unable to connect to host");
+$sql = mysql_select_db ('test',$conn) or die("unable to connect to database");
+?>
+   
